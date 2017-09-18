@@ -50,7 +50,7 @@ public class MailUtils {
             BodyPart messageBodyPart = new MimeBodyPart();
 
             // 消息
-            messageBodyPart.setText("This is message body");
+            messageBodyPart.setContent(mailProperties.getContent(), mailProperties.getType());
 
             // 创建多重消息
             Multipart multipart = new MimeMultipart();
@@ -59,11 +59,13 @@ public class MailUtils {
             multipart.addBodyPart(messageBodyPart);
 
             // 附件部分
-            messageBodyPart = new MimeBodyPart();
-            DataSource source = new FileDataSource(file);
-            messageBodyPart.setDataHandler(new DataHandler(source));
-            messageBodyPart.setFileName("附件");
-            multipart.addBodyPart(messageBodyPart);
+            if(file != null){
+                messageBodyPart = new MimeBodyPart();
+                DataSource source = new FileDataSource(file);
+                messageBodyPart.setDataHandler(new DataHandler(source));
+                messageBodyPart.setFileName(file.getName());
+                multipart.addBodyPart(messageBodyPart);
+            }
 
             // 发送完整消息
             mimeMessage.setContent(multipart);
