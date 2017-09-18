@@ -2,6 +2,7 @@ package com.solar.mail.utils;
 
 /**
  * Created by hushaoge on 2017/9/15.
+ * 邮件属性对象
  */
 public class MailProperties {
     /**

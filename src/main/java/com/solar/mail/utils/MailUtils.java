@@ -16,7 +16,11 @@ import java.util.Properties;
  * 邮件发送
  */
 public class MailUtils {
-
+    /**
+     * 发送普通邮件
+     * @param mailProperties
+     * @return
+     */
     public static boolean sendMessage(MailProperties mailProperties){
         if(mailProperties == null){
             return false;
@@ -33,6 +37,12 @@ public class MailUtils {
         return sendMessage(mimeMessage);
     }
 
+    /**
+     * 发送带附件的邮件,没有传入附件相当于普通邮件
+     * @param mailProperties
+     * @param file
+     * @return
+     */
     public static boolean sendEnclosure(MailProperties mailProperties,  File file){
         if(mailProperties == null){
             return false;
@@ -76,6 +86,11 @@ public class MailUtils {
         return sendMessage(mimeMessage);
     }
 
+    /**
+     * 调用发送邮件API
+     * @param mimeMessage
+     * @return
+     */
     public static boolean sendMessage(MimeMessage mimeMessage){
         if(mimeMessage == null){
             return false;
@@ -89,6 +104,13 @@ public class MailUtils {
         return false;
     }
 
+    /**
+     * 获取session
+     * @param properties
+     * @param userName
+     * @param password
+     * @return
+     */
     public static Session getSession(Properties properties, final String userName, final String password){
         // 获取默认session对象
         Session session = Session.getDefaultInstance(properties, new Authenticator(){
@@ -100,6 +122,12 @@ public class MailUtils {
         return session;
     }
 
+    /**
+     * 获取MimeMessage对象，包括From、To、Subject
+     * @param session
+     * @param mailProperties
+     * @return
+     */
     public static MimeMessage getMimeMessage(Session session, MailProperties mailProperties){
         try {
             // 创建默认的 MimeMessage 对象
